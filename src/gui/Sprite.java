@@ -63,6 +63,14 @@ public class Sprite {
         velocityY += y;
     }
 
+    public Double getWidth() {
+        return width;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
     public void update(Double time) {
         positionX += velocityX * time;
         positionY += velocityY * time;
