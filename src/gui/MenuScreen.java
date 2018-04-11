@@ -106,4 +106,5 @@ public class MenuScreen {
         logo.setLayoutY(80);
         anchorPane.getChildren().add(logo);
     }
+
 }

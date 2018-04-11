@@ -30,6 +30,7 @@ public class Main extends Application {
             mainStage.setResizable(false);
             primaryStage = mainStage;
             primaryStage.show();
+
         } catch (Exception e){
             e.printStackTrace();
         }

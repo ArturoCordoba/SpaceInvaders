@@ -147,4 +147,5 @@ public class ServerScreen {
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
         anchorPane.setBackground(new Background(background));
     }
+
 }
