@@ -57,4 +57,5 @@ public abstract class Enemy implements Comparable<Enemy> {
     public String toString() {
         return this.getClass() + "," + score + "," + sprite;
     }
+
 }

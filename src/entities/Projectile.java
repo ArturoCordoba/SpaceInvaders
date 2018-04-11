@@ -30,4 +30,5 @@ public class Projectile implements Comparable<Projectile> {
     public String toString() {
         return this.getClass() + "," + sprite;
     }
+
 }

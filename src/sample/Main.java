@@ -26,6 +26,7 @@ public class Main extends Application {
 
     public static void connect(String ip, Integer port)
     {
+        //Main
         socket = new SocketClient(ip, port);
         online = true;
     }
@@ -47,6 +48,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 
 }

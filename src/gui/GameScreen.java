@@ -432,6 +432,7 @@ public class GameScreen {
         }
     }
 
+
     /**
      * Metodo que verifica si un ovni llego a uno de los bordes de la ventana
      * @param ovni Ovni a verificar

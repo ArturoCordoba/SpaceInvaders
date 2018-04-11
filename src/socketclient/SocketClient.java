@@ -24,6 +24,7 @@ public class SocketClient
         }
     }
 
+
     public void sentString(String message)
     {
         try

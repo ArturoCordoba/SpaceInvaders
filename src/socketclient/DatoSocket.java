@@ -28,6 +28,7 @@ public class DatoSocket implements Serializable
         resultado = Integer.toString(c) + "--" + d;
         return resultado;
     }
+    
 
 
 

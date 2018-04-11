@@ -68,4 +68,5 @@ public class Player {
     public String toString() {
         return this.getClass() + "," + lives + "," + score + "," + sprite;
     }
+
 }
