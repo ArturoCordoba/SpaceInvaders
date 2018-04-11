@@ -1,6 +1,7 @@
 package sample;
 
 import gui.MenuScreen;
+import gui.ServerScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -24,10 +25,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage){
         try {
-            //mainStage = new Stage();
+            new ServerScreen(mainStage);
             mainStage.setTitle("Space Invaders");
             mainStage.setResizable(false);
-            //menuScreen = new MenuScreen(mainStage);
             primaryStage = mainStage;
             primaryStage.show();
         } catch (Exception e){

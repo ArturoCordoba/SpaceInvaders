@@ -98,14 +98,14 @@ public class DeadScreen {
         });
 
         //Se crea el boton para regresar al menu
-        BlueButton blueButton = new BlueButton("MENU");
-        blueButton.setLayoutX(buttons_start_x);
-        blueButton.setLayoutY(buttons_start_y + (counter * space_between_buttons_y));
-        anchorPane.getChildren().add(blueButton);
+        BlueButton menuButton = new BlueButton("MENU");
+        menuButton.setLayoutX(buttons_start_x);
+        menuButton.setLayoutY(buttons_start_y + (counter * space_between_buttons_y));
+        anchorPane.getChildren().add(menuButton);
         counter++;
 
         //Se le asigna la accion a realizar al ser clickeado
-        blueButton.setOnAction(new EventHandler<ActionEvent>() {
+        menuButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 stage.setScene(Main.getMenuScreen().getScene());
