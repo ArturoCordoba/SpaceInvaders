@@ -5,20 +5,29 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Stage mainStage;
-    private MenuScreen menuScreen;
+    private static Stage mainStage = new Stage();
+    private static MenuScreen menuScreen = new MenuScreen(mainStage);
+    private static boolean online = false;
 
-    public MenuScreen getMenuScreen() {
+    public static MenuScreen getMenuScreen() {
         return menuScreen;
+    }
+
+    public static boolean isOnline() {
+        return online;
+    }
+
+    public static void setOnline(boolean online) {
+        Main.online = online;
     }
 
     @Override
     public void start(Stage primaryStage){
         try {
-            mainStage = new Stage();
+            //mainStage = new Stage();
             mainStage.setTitle("Space Invaders");
             mainStage.setResizable(false);
-            menuScreen = new MenuScreen(mainStage);
+            //menuScreen = new MenuScreen(mainStage);
             primaryStage = mainStage;
             primaryStage.show();
         } catch (Exception e){

@@ -1,6 +1,7 @@
 package entities;
 
 import gui.Sprite;
+import javafx.scene.image.Image;
 
 import java.lang.Integer;
 import java.lang.Double;
@@ -12,8 +13,8 @@ public class Player {
     private Double lastShootTime;
 
     public Player() {
-        this.sprite = new Sprite("resources/playership_blue.png");
-        this.sprite.setPosition(720, 800);
+        this.sprite = new Sprite("resources/canon.png");
+        this.sprite.setPosition(720, 850);
         this.lives = 3;
         this.score = 0;
         this.lastShootTime = 0.0;
@@ -27,8 +28,19 @@ public class Player {
         return lives;
     }
 
-    public void setLives(Integer lives) {
-        this.lives = lives;
+    public void addLive() {
+        this.lives += 1;
+    }
+
+    /**
+     * Metodo para restar una vida
+     */
+    public void decreaseLive(){
+        this.lives -= 1;
+
+        if(this.lives <= 0){
+            sprite.setImage(new Image("resources/deadcanon.png"));
+        }
     }
 
     public Integer getScore() {

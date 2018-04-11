@@ -16,20 +16,24 @@ public class Sprite {
     protected Double width;
     protected Double height;
 
+    /**
+     * Constructor
+     * @param filename Ruta del archivo donde se encuentra la imagen del sprite
+     */
     public Sprite(String filename) {
         Image image = new Image(filename);
         this.image = image;
         width = image.getWidth();
         height = image.getHeight();
-        positionX = Double.valueOf(0);
-        positionY = Double.valueOf(0);
+        positionX = 0.0;
+        positionY = 0.0;
         velocityX = 0;
         velocityY = 0;
     }
 
     public Sprite(){
-        positionX = Double.valueOf(0);
-        positionY = Double.valueOf(0);
+        positionX = 0.0;
+        positionY = 0.0;
         velocityX = 0;
         velocityY = 0;
     }
@@ -48,9 +52,33 @@ public class Sprite {
         return positionY;
     }
 
+    public void setPositionX(Double positionX) {
+        this.positionX = positionX;
+    }
+
+    public void setPositionY(Double positionY) {
+        this.positionY = positionY;
+    }
+
     public void setPosition(Integer x, Integer y) {
         positionX = Double.valueOf(x);
         positionY = Double.valueOf(y);
+    }
+
+    public Integer getVelocityX() {
+        return velocityX;
+    }
+
+    public void setVelocityX(Integer velocityX) {
+        this.velocityX = velocityX;
+    }
+
+    public Integer getVelocityY() {
+        return velocityY;
+    }
+
+    public void setVelocityY(Integer velocityY) {
+        this.velocityY = velocityY;
     }
 
     public void setVelocity(Integer x, Integer y) {

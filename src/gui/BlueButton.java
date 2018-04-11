@@ -10,13 +10,17 @@ import javafx.scene.text.Font;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class MenuButton extends Button {
+public class BlueButton extends Button {
 
     private final String FONT_PATH = "src/resources/kenvector_future.ttf";
     private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent; -fx-background-image: url('resources/blue_button_pressed.png');";
     private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent; -fx-background-image: url('resources/blue_button.png');";
 
-    public MenuButton(String text){
+    /**
+     * Constructor
+     * @param text Texto que contendra el boton
+     */
+    public BlueButton(String text){
         setText(text);
         setButtonFont();
         setPrefWidth(190);
@@ -25,6 +29,9 @@ public class MenuButton extends Button {
         initializeButtonListeners();
     }
 
+    /**
+     * Metodo para colocar el tipo de letra al boton
+     */
     private void setButtonFont(){
         try {
             setFont(Font.loadFont(new FileInputStream(FONT_PATH), 23));
@@ -33,18 +40,27 @@ public class MenuButton extends Button {
         }
     }
 
+    /**
+     * Metodo para colocar el estilo correspondiente a cuando es presionado
+     */
     private void  setButtonPressedStyle(){
         setStyle(BUTTON_PRESSED_STYLE);
         setPrefHeight(45);
         setLayoutY(getLayoutY() + 4);
     }
 
+    /**
+     * Metodo para colocar el estilo correspondiente a cuando no es presionado
+     */
     private void setButtonReleasedStyle(){
         setStyle(BUTTON_FREE_STYLE);
         setPrefHeight(49);
         setLayoutY(getLayoutY() - 4);
     }
 
+    /**
+     * Metodo para inicializar los listeners del boton
+     */
     private void initializeButtonListeners(){
         //Caso en el que el boton es presionado
         setOnMousePressed(new EventHandler<MouseEvent>() {

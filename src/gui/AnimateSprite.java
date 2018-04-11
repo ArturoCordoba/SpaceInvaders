@@ -12,6 +12,13 @@ public class AnimateSprite extends Sprite{
     private Double elapsedTime;
     private Integer index;
 
+    /**
+     * Constructor
+     * @param filename Ruta sin el numero ni la extension de las imagenes que componen la animacion
+     * @param frames Cantidad de imagenes que componen la animacion
+     * @param extension Extension de las imagenes
+     * @param duration Duracion de cada frame
+     */
     public AnimateSprite(String filename, Integer frames, String extension, Double duration) {
         super(filename + "1" + extension);
         framesList = new Image[frames];
@@ -23,6 +30,11 @@ public class AnimateSprite extends Sprite{
         index = 0;
     }
 
+    /**
+     * Metodo para calcular el frame que corresponde segun el tiempo transcurrido
+     * @param time Tiempo desde el ultimo frame
+     * @return Image correspondiente
+     */
     public Image getFrame(double time) {
         elapsedTime += time;
         if(elapsedTime >= duration) {
