@@ -52,4 +52,9 @@ public abstract class Enemy implements Comparable<Enemy> {
             return 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass() + "," + score + "," + sprite;
+    }
 }

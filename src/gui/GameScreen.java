@@ -20,6 +20,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import sample.Main;
 import tools.Random;
 
 import java.io.FileInputStream;
@@ -406,6 +407,7 @@ public class GameScreen {
 
                 playerShip.update(elapsedTime);
                 playerShip.render(gcontext);
+                sentInfo();
 
             }
         }.start();
@@ -575,5 +577,44 @@ public class GameScreen {
         createBunker(1170, 720);
         createEnemies();
         player.addLive();
+    }
+
+
+    private void sentInfo()
+    {
+        if(Main.isOnline())
+        {
+            String info = "";
+
+            for (Integer i = 0; i < enemyList.getSize(); i++)
+            {
+                Enemy enemy = (Enemy) enemyList.getElement(i).getDataT();
+                info += enemy + "_";
+            }
+            info += "-";
+
+            info += player + "-";
+
+            for (Integer i = 0; i < enemyProjectileList.getSize() ; i++)
+            {
+                Projectile projectile = (Projectile) enemyProjectileList.getElement(i).getDataT();
+                info += projectile + "_";
+            }
+            info += "-";
+
+            for (Integer i = 0; i < playerProjectileList.getSize() ; i++)
+            {
+                Projectile projectile = (Projectile) playerProjectileList.getElement(i).getDataT();
+                info += projectile + "_";
+            }
+            info += "-";
+
+            for (Integer i = 0; i < blockList.getSize() ; i++)
+            {
+               Block block = (Block) blockList.getElement(i).getDataT();
+               info += block + "_";
+            }
+
+        }
     }
 }

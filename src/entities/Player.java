@@ -62,4 +62,10 @@ public class Player {
     public Double getLastShootTime() {
         return lastShootTime;
     }
+
+
+    @Override
+    public String toString() {
+        return this.getClass() + "," + lives + "," + score + "," + sprite;
+    }
 }

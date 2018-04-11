@@ -24,4 +24,9 @@ public class Block implements Comparable<Block> {
             return 1;
         }
     }
+
+    @Override
+    public String toString() {
+        return this.getClass() + "," + sprite;
+    }
 }

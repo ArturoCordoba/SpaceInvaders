@@ -116,8 +116,8 @@ public class Sprite {
         return sprite.getBoundary().intersects( this.getBoundary() );
     }
 
+    @Override
     public String toString() {
-        return "Position: [" + positionX + "," + positionY + "]"
-                + " Velocity: [" + velocityX + "," + velocityY + "]";
+        return positionX + "," + positionY + "," + velocityX + "," + velocityY;
     }
 }

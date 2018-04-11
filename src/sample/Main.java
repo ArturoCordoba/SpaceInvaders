@@ -4,22 +4,30 @@ import gui.MenuScreen;
 import gui.ServerScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import socketclient.SocketClient;
 
 public class Main extends Application {
     private static Stage mainStage = new Stage();
     private static MenuScreen menuScreen = new MenuScreen(mainStage);
-    private static boolean online = false;
+    private static Boolean online = false;
+    private static SocketClient socket;
 
     public static MenuScreen getMenuScreen() {
         return menuScreen;
     }
 
-    public static boolean isOnline() {
+    public static Boolean isOnline() {
         return online;
     }
 
-    public static void setOnline(boolean online) {
+    public static void setOnline(Boolean online) {
         Main.online = online;
+    }
+
+    public static void connect(String ip, Integer port)
+    {
+        socket = new SocketClient(ip, port);
+        online = true;
     }
 
     @Override

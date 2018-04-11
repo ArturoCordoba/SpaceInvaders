@@ -116,9 +116,8 @@ public class ServerScreen {
                 String serverIP = serverAddressTF.getCharacters().toString();
                 String serverPort = serverPortTF.getCharacters().toString();
 
-                System.out.println(serverIP + ":" + serverPort);
+                Main.connect(serverIP, Integer.valueOf(serverPort));
 
-                Main.setOnline(true);
                 stage.setScene(Main.getMenuScreen().getScene());
             }
         });
