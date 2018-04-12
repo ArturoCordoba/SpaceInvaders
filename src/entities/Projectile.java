@@ -3,11 +3,12 @@ package entities;
 import java.lang.String;
 import java.lang.Integer;
 import gui.Sprite;
+import tools.SplitString;
 
 public class Projectile implements Comparable<Projectile> {
     private Sprite sprite;
 
-    public Projectile(String file_path, Integer x, Integer y, Integer velocity) {
+    public Projectile(String file_path, Double x, Double y, Integer velocity) {
         sprite = new Sprite(file_path);
         sprite.setPosition(x, y);
         sprite.setVelocity(0, velocity);
@@ -28,7 +29,7 @@ public class Projectile implements Comparable<Projectile> {
 
     @Override
     public String toString() {
-        return this.getClass() + "," + sprite;
+        return SplitString.split(this.getClass().toString(), ".").getElement(0).getDataT() + "," + sprite;
     }
 
 }

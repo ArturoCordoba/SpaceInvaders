@@ -59,20 +59,6 @@ public class MenuScreen {
             }
         });
 
-        BlueButton watchButton = new BlueButton("WATCH");
-        watchButton.setLayoutX(menu_buttons_start_x);
-        watchButton.setLayoutY(menu_buttons_start_y + (counter * space_between_buttons_y));
-        anchorPane.getChildren().add(watchButton);
-        counter++;
-
-        //Se establece la accion a realizar al ser presionado
-        watchButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-            }
-        });
-
         BlueButton exitButton = new BlueButton("EXIT");
         exitButton.setLayoutX(menu_buttons_start_x);
         exitButton.setLayoutY(menu_buttons_start_y + (counter * space_between_buttons_y));

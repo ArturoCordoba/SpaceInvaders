@@ -29,27 +29,26 @@ import java.io.FileNotFoundException;
 //audioclip
 
 public class GameScreen {
+    protected final Integer width = 1440;
+    protected final Integer height = 900;
+    protected AnchorPane anchorPane;
+    protected Scene scene;
+    protected Stage stage;
 
-    private final Integer width = 1440;
-    private final Integer height = 900;
-    private AnchorPane anchorPane;
-    private Scene scene;
-    private Stage stage;
+    protected LinkedList<Enemy> enemyList;
+    protected LinkedList<Projectile> playerProjectileList;
+    protected LinkedList<Projectile> enemyProjectileList;
+    protected LinkedList<Block> blockList;
+    protected LinkedList<Integer> velocityBoost;
 
-    private LinkedList<Enemy> enemyList;
-    private LinkedList<Projectile> playerProjectileList;
-    private LinkedList<Projectile> enemyProjectileList;
-    private LinkedList<Block> blockList;
-    private LinkedList<Integer> velocityBoost;
+    protected Player player;
 
-    private Player player;
+    protected Integer level;
+    protected Integer ovniCounter = 0;
 
-    private Integer level;
-    private Integer ovniCounter = 0;
-
-    private Long lastNanoTime;
-    private Double lastChangeDirection;
-    private Double lastOvniTime;
+    protected Long lastNanoTime;
+    protected Double lastChangeDirection;
+    protected Double lastOvniTime;
 
     /**
      * Constructor
@@ -77,10 +76,19 @@ public class GameScreen {
         render();
     }
 
+    public GameScreen(Stage mainStage, String a){
+        anchorPane = new AnchorPane();
+        scene = new Scene(anchorPane, width, height);
+        stage = mainStage;
+        stage.setScene(scene);
+        createBackground();
+        createLabels();
+    }
+
     /**
      * Metodo para crear los labels de la ventana
      */
-    private void createLabels(){
+    protected void createLabels(){
         Integer labels_start_x = 4; //Posicion en x donde se empiezan a dibujar los labels
         Integer labels_start_y = 4; //Posicion en y donde se empiezan a dibujar los labels
         Integer counter = 0;
@@ -124,7 +132,7 @@ public class GameScreen {
     /**
      * Metodo para crear el fondo de la ventana
      */
-    private void createBackground(){
+    protected void createBackground(){
         Image backgroundImage = new Image("resources/game_background.jpg", width, height, false, true);
         BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
         anchorPane.setBackground(new Background(background));
@@ -135,7 +143,7 @@ public class GameScreen {
      * Metodo encargado del renderizado de la ventana
      */
     @SuppressWarnings("Duplicates")
-    private void render(){
+    protected void render(){
         Canvas canvas = new Canvas(width, height);
         anchorPane.getChildren().add(canvas);
 
@@ -201,8 +209,8 @@ public class GameScreen {
                     playerShip.addVelocity(300,0);
                 if (input.contains("SPACE") && (player.getLastShootTime() > 0.30)) {
                     player.setLastShootTime(0.0);
-                    Integer x = (int)(playerShip.getPositionX() + (playerShip.getWidth() / 2));
-                    Integer y = (int)(playerShip.getPositionY() - playerShip.getHeight()) + 40;
+                    Double x = (playerShip.getPositionX() + (playerShip.getWidth() / 2));
+                    Double y = (playerShip.getPositionY() - playerShip.getHeight()) + 40;
                     Projectile projectile = new Projectile("resources/laser_blue.png", x, y, -800);
                     playerProjectileList.insertAtFirst(projectile);
                 }
@@ -210,11 +218,11 @@ public class GameScreen {
                 //Se dibuja la informacion de la partida
                 gcontext.fillText(player.getScore().toString(), 110, 50); //score
                 gcontext.fillText(level.toString(), 110, 75); //level
-                Integer heart_position_x = 100; //vidas
+                Double heart_position_x = 100.0; //vidas
                 for (Integer i = 0; i < player.getLives(); i++) {
                     Sprite heart = new Sprite();
                     heart.setImage(heartImage);
-                    heart.setPosition(heart_position_x, 4);
+                    heart.setPosition(heart_position_x, 4.0);
                     heart_position_x += 30;
                     heart.render(gcontext);
 
@@ -417,7 +425,7 @@ public class GameScreen {
     /**
      * Metodo que verifica si algun enemigo llego a el borde de la ventana
      */
-    private void checkEdge() {
+    protected void checkEdge() {
         for (Integer i = 0; i < enemyList.getSize(); i++) {
             Enemy enemy = (Enemy) enemyList.getElement(i).getDataT();
 
@@ -437,7 +445,7 @@ public class GameScreen {
      * Metodo que verifica si un ovni llego a uno de los bordes de la ventana
      * @param ovni Ovni a verificar
      */
-    private void checkOvniEdge(Ovni ovni){
+    protected void checkOvniEdge(Ovni ovni){
         //Se verifica si el ovni llego al borde de la pantalla
         Double positionX = ovni.getSprite().getPositionX();
         if ((ovni.isShowedUp() && (positionX < 10) || (1430 - ovni.getSprite().getWidth()) < positionX) && ovni.getLastChangeDirection() > 1.0) {
@@ -450,7 +458,7 @@ public class GameScreen {
     /**
      * Metodo para cambiar la velocidad en X de los enemigos
      */
-    private void changeDirectionX(){
+    protected void changeDirectionX(){
         for (Integer i = 0; i < enemyList.getSize(); i++) { //Se recorre la lista de enemigos
             Enemy enemy = (Enemy) enemyList.getElement(i).getDataT(); //Se obtiene cada enemigo
             Sprite sprite = enemy.getSprite(); //Se obtiene su sprite
@@ -463,7 +471,7 @@ public class GameScreen {
     /**
      * Metodo para cambiar la posicion en y de todos los enemigos que no sean un ovni
      */
-    private void changeLevelY(){
+    protected void changeLevelY(){
         for (Integer i = 0; i < enemyList.getSize(); i++) {
             Enemy enemy = (Enemy) enemyList.getElement(i).getDataT(); //Se obtiene cada enemigo
             Sprite sprite = enemy.getSprite(); //Se obtiene su sprite
@@ -476,7 +484,7 @@ public class GameScreen {
     /**
      * Metodo que verifica cuando debe aumentar la velocidad de los enemigos segun el tamaño de la lista de enemigos
      */
-    private void checkEnemyListSize(){
+    protected void checkEnemyListSize(){
         Integer xBoost = 10; //Numero en el que se aumenta la velocidad en x de los enemigos
         if((enemyList.getSize() % 10 == 0) && !(velocityBoost.contains(enemyList.getSize()))){
             velocityBoost.insertAtFirst(enemyList.getSize());
@@ -497,14 +505,14 @@ public class GameScreen {
     /**
      * Metodo para crear los enemigos
      */
-    private void createEnemies(){
-        Integer position_start_y = 10;
+    protected void createEnemies(){
+        Double position_start_y = 10.0;
 
-        Integer space_between_aliens_x = 74;
-        Integer space_between_aliens_y = 50;
+        Double space_between_aliens_x = 74.0;
+        Double space_between_aliens_y = 50.0;
 
         for (Integer i = 0; i < 6; i++) {
-            Integer position_x = 10;
+            Double position_x = 10.0;
 
             for (Integer j = 0; j < 15; j++) {
                 Enemy enemy;
@@ -532,10 +540,10 @@ public class GameScreen {
      * @param x Posicion x de la esquina superior izquierda
      * @param y Posicion y de la esquina inferior derecha
      */
-    private void createBunker(Integer x, Integer y){
-        Integer block_size = 12; //Tamanio de los bloques
-        Integer rows = 6; //Numero de filas
-        Integer colums = 10; //Numero de columnas
+    protected void createBunker(Integer x, Integer y){
+        Double block_size = 12.0; //Tamanio de los bloques
+        Double rows = 6.0; //Numero de filas
+        Double colums = 10.0; //Numero de columnas
 
         for (Integer i = 0; i < rows; i++) {
             for (Integer j = 0; j < colums; j++) {
@@ -554,11 +562,11 @@ public class GameScreen {
     /**
      * Metodo para crear un ovni
      */
-    private void createOvni() {
+    protected void createOvni() {
         lastOvniTime = 0.0; //se reinicia el tiempo de aparicion del ovni
 
         if (ovniCounter < 1) { //Solo puede existir un ovni en pantalla
-            Ovni ovni = new Ovni(-100, 50);
+            Ovni ovni = new Ovni(-100.0, 50.0);
             ovni.setVelocity(250, 0);
             enemyList.insertAtFirst(ovni);
             ovniCounter++;
@@ -568,7 +576,7 @@ public class GameScreen {
     /**
      * Metodo para cambiar de nivel, crea de nuevo los enemigos y restaura los bunkers
      */
-    private void changeLevel(){
+    protected void changeLevel(){
         level++;
         blockList.cleanList();
         velocityBoost.cleanList();
@@ -581,39 +589,43 @@ public class GameScreen {
     }
 
 
-    private void sentInfo()
+    protected void sentInfo()
     {
         if(Main.isOnline())
         {
-            String info = "";
+            String info = level.toString() + "/";
 
             for (Integer i = 0; i < enemyList.getSize(); i++)
             {
                 Enemy enemy = (Enemy) enemyList.getElement(i).getDataT();
                 info += enemy + "_";
             }
-            info += "-";
+            info += "/";
 
-            info += player + "-";
+            info += player + "/";
 
             for (Integer i = 0; i < enemyProjectileList.getSize() ; i++)
             {
                 Projectile projectile = (Projectile) enemyProjectileList.getElement(i).getDataT();
                 info += projectile + "_";
             }
-            info += "-";
+            info += "/";
 
             for (Integer i = 0; i < playerProjectileList.getSize() ; i++)
             {
                 Projectile projectile = (Projectile) playerProjectileList.getElement(i).getDataT();
                 info += projectile + "_";
             }
-            info += "-";
+            info += "/";
 
             for (Integer i = 0; i < blockList.getSize() ; i++)
             {
                Block block = (Block) blockList.getElement(i).getDataT();
                info += block + "_";
+            }
+
+            if(Main.isOnline()){
+                Main.getSocket().sentString(info);
             }
 
         }

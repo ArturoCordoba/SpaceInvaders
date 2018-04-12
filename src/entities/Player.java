@@ -2,6 +2,7 @@ package entities;
 
 import gui.Sprite;
 import javafx.scene.image.Image;
+import tools.SplitString;
 
 import java.lang.Integer;
 import java.lang.Double;
@@ -14,7 +15,7 @@ public class Player {
 
     public Player() {
         this.sprite = new Sprite("resources/canon.png");
-        this.sprite.setPosition(720, 850);
+        this.sprite.setPosition(720.0, 850.0);
         this.lives = 3;
         this.score = 0;
         this.lastShootTime = 0.0;
@@ -66,7 +67,7 @@ public class Player {
 
     @Override
     public String toString() {
-        return this.getClass() + "," + lives + "," + score + "," + sprite;
+        return SplitString.split(this.getClass().toString(), ".").getElement(0).getDataT() + "," + lives + "," + score + "," + sprite;
     }
 
 }

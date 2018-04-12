@@ -24,6 +24,10 @@ public class Main extends Application {
         Main.online = online;
     }
 
+    public static SocketClient getSocket() {
+        return socket;
+    }
+
     public static void connect(String ip, Integer port)
     {
         //Main

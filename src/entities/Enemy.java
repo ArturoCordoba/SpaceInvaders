@@ -1,8 +1,11 @@
 package entities;
 
 import java.lang.Integer;
+
+import datastructures.LinkedList;
 import gui.Sprite;
 import tools.Random;
+import tools.SplitString;
 
 public abstract class Enemy implements Comparable<Enemy> {
     protected Sprite sprite;
@@ -39,8 +42,8 @@ public abstract class Enemy implements Comparable<Enemy> {
      */
     public Projectile shoot(){
         this.lastShootTime = 0.0;
-        Integer x = (int)(sprite.getPositionX() + (sprite.getWidth() / 2)); //Se obtiene la posicion en x de la bala
-        Integer y = (int)(sprite.getPositionY() - sprite.getHeight()) + 40; //Se obtiene la posicion en y de la bala
+        Double x = (sprite.getPositionX() + (sprite.getWidth() / 2)); //Se obtiene la posicion en x de la bala
+        Double y = (sprite.getPositionY() - sprite.getHeight()) + 40; //Se obtiene la posicion en y de la bala
         return new Projectile("resources/laser_red.png", x, y, 800);
     }
 
@@ -55,7 +58,6 @@ public abstract class Enemy implements Comparable<Enemy> {
 
     @Override
     public String toString() {
-        return this.getClass() + "," + score + "," + sprite;
+        return SplitString.split(this.getClass().toString(), ".").getElement(0).getDataT() + "," + score + "," + sprite;
     }
-
 }

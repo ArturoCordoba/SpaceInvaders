@@ -1,13 +1,14 @@
 package entities;
 
 import gui.Sprite;
+import tools.SplitString;
 
 import java.lang.Integer;
 
 public class Block implements Comparable<Block> {
     private Sprite sprite;
 
-    public Block(Integer x, Integer y) {
+    public Block(Double x, Double y) {
         sprite = new Sprite("resources/block.png");
         sprite.setPosition(x, y);
     }
@@ -27,7 +28,7 @@ public class Block implements Comparable<Block> {
 
     @Override
     public String toString() {
-        return this.getClass() + "," + sprite;
+        return SplitString.split(this.getClass().toString(), ".").getElement(0).getDataT() + "," + sprite;
     }
 
 }

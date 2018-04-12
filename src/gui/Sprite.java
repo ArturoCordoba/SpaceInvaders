@@ -60,9 +60,9 @@ public class Sprite {
         this.positionY = positionY;
     }
 
-    public void setPosition(Integer x, Integer y) {
-        positionX = Double.valueOf(x);
-        positionY = Double.valueOf(y);
+    public void setPosition(Double x, Double y) {
+        positionX = x;
+        positionY = y;
     }
 
     public Integer getVelocityX() {

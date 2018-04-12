@@ -43,7 +43,7 @@ public class ServerScreen {
 
     private void createLabels(){
         Integer labels_start_x = 380; //Posicion en x donde inician los labels
-        Integer labels_start_y = 300; //Posicion en y donde inician los labels
+        Integer labels_start_y = 230; //Posicion en y donde inician los labels
         Integer space_between_labels_y = 110; //Espacio entre los labels
         Integer counter = 0;
 
@@ -75,7 +75,7 @@ public class ServerScreen {
     
     private void createTextFields(){
         Integer textFields_start_x = 630; //Posicion en x donde inician los TextFields
-        Integer textFields_start_y = 300; //Posicion en y donde inician los TextFields
+        Integer textFields_start_y = 230; //Posicion en y donde inician los TextFields
         Integer space_between_textFields_y = 110; //Espacio entre los TextFields
         Integer counter = 0;
 
@@ -96,9 +96,10 @@ public class ServerScreen {
     /**
      * Metodo para crear los botones en la ventana
      */
+    @SuppressWarnings("Duplicates")
     private void createButtons(){
         Integer buttons_start_x = 620; //Posicion x donde se crean los botones
-        Integer buttons_start_y = 490; //Posicion y donde se crea el primer boton
+        Integer buttons_start_y = 420; //Posicion y donde se crea el primer boton
         Integer space_between_buttons_y = 120; //Espacio entre los botones
         Integer counter = 0; //Variable que lleva la cuenta de botones creados
 
@@ -119,6 +120,23 @@ public class ServerScreen {
                 Main.connect(serverIP, Integer.valueOf(serverPort));
 
                 stage.setScene(Main.getMenuScreen().getScene());
+            }
+        });
+
+        BlueButton watchButton = new BlueButton("WATCH");
+        watchButton.setLayoutX(buttons_start_x);
+        watchButton.setLayoutY(buttons_start_y + (counter * space_between_buttons_y));
+        anchorPane.getChildren().add(watchButton);
+        counter++;
+
+        //Se establece la accion a realizar al ser presionado
+        watchButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                String serverIP = serverAddressTF.getCharacters().toString();
+                String serverPort = serverPortTF.getCharacters().toString();
+                Main.connect(serverIP, Integer.valueOf(serverPort));
+                new ObserverScreen(stage);
             }
         });
 

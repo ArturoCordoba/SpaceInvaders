@@ -7,7 +7,7 @@ public class Ovni extends Enemy {
     private boolean showedUp;
     private Double lastChangeDirection;
 
-    public Ovni(Integer x, Integer y){
+    public Ovni(Double x, Double y){
         sprite = new AnimateSprite("resources/ovni", 19, ".png", 0.02);
         sprite.setPosition(x, y);
         score = Random.getRamdomNumber(100, 300);

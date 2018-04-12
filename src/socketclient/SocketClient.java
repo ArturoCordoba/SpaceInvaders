@@ -32,7 +32,7 @@ public class SocketClient
             DataOutputStream bufferOut = new DataOutputStream(socket.getOutputStream());
             DatoSocket aux = new DatoSocket(message);
             aux.writeObject(bufferOut);
-            System.out.println("Cliente Java: Enviado " + aux.toString());
+            //System.out.println("Cliente Java: Enviado " + aux.toString());
         }
         catch (IOException e)
         {
@@ -40,19 +40,23 @@ public class SocketClient
         }
     }
 
-    public void receiveString()
+    public String receiveString()
     {
+        String receiveString = "";
         try {
         //Se obtiene un flujo de datos para recibir datos del servidor.
         DataInputStream bufferIn = new DataInputStream(socket.getInputStream());;
         DatoSocket dato = new DatoSocket("");
         dato.readObject(bufferIn);
-        System.out.println("Cliente Java: Recibido " + dato.toString());
+
+        receiveString = dato.toString();
+        //System.out.println("Cliente Java: Recibido " + dato.toString());
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return receiveString;
     }
 
 }
